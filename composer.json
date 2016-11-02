@@ -13,11 +13,27 @@
     "require": {
         "php": ">=5.5",
         "silex/silex": "~2.0@dev",
+        "symfony/translation": "~3.0"
+    },
+    "require-dev": {
+        "satooshi/php-coveralls": "dev-master",
+        "etna/composer-behat-utils": "2.x-dev",
+        "saxulum/saxulum-doctrine-orm-manager-registry-provider": "^3.0",
+        "behat/behat": "3.x@stable",
+        "phpunit/php-code-coverage": "2.0.*@dev",
+        "etna/doctrine-provider": "2.x",
+        "phpunit/phpcov": "2.0.*@dev"
     },
     "autoload": {
         "psr-4": {
-            "ETNA\\Silex\\Provider\\Doctrine\\": "src"
+            "Tests\\": "Tests",
+            "TestTranslation\\": "app",
+            "ETNA\\Silex\\Provider\\Translation\\": "src",
+            "ETNA\\FeatureContext\\": "etna/composer-behat-utils/src/"
         }
+    },
+    "scripts": {
+        "test": "behat"
     },
     "extra": {
         "branch-alias": {
@@ -27,7 +43,7 @@
     "repositories": [
        {
            "type": "composer",
-           "url":  "http://blu-composer.herokuapp.com"
+           "url":  "https://blu-composer.herokuapp.com"
        }
    ]
 }

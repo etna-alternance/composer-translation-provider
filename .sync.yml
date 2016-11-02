@@ -1,0 +1,7 @@
+---
+README.md:
+    name: "translation-service-provider"
+    minor_version: "0.1"
+    badges:
+        - "[![Build Status](http://drone.etna-alternance.net/github.com/etna-alternance/translation-service-provider)]"
+

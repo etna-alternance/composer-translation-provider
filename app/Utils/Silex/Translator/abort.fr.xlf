@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Bad request : operation forbidden on a deleted contract</source>
+                <target>Cette opération est impossible sur un contrat annulé.</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Manager not found : %id%</source>
+                <target>Résponsable non trouvé : %id%</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

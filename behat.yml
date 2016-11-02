@@ -1,0 +1,175 @@
+# #behat.yml
+# default:
+#     formatters:
+#         name:                    [ progress ]
+#         parameters:
+#             decorated:           true
+#             verbose:             false
+#             time:                true
+#             language:            fr
+#             output_path:         null
+#             multiline_arguments: true
+#     autoload:
+#         '': %behat.paths.features%/bootstrap
+#     suites:
+#         default:
+#             paths:
+#                 - Test/Functional
+# wip:
+#     filters:
+#         tags: "@wip"
+#     formatters:
+#         name: progress
+# ci:
+#     formatters:
+#         name:       progress,junit,html
+#         parameters:
+#             output_path: null,tmp/behat/behatJunit,tmp/behat/behat_report.html
+#     context:
+#         parameters:
+#             # Whether or not to collect code coverage
+#             enableCodeCoverage: true
+
+#             # Path to store the generated code coverage report
+#             coveragePath: /tmp/behat/coverage
+
+#             # White list of directories to collect coverage about
+#             whitelist:
+#                 - app
+#                 - src
+#                 - TestCheck
+#             # Black list of directories to not collect coverage about
+#             blacklist:
+#                 - tmp
+#                 - Test
+#                 - bin
+#                 - vendor
+# behat.yml
+# behat.yml
+# default:
+#     autoload:
+#         '': %paths.base%/vendor/etna/composer-behat-utils/src/contexts
+#     suites:
+#         default:
+#             paths:
+#                 - %paths.base%/Tests/Features
+#             contexts:
+#                 - ETNA\FeatureContext\ApiContext
+#                 - ETNA\FeatureContext\MainContext
+#                 - Tests\Bootstrap\FeatureContext
+#                 - ETNA\FeatureContext\DoctrineContext:
+#                     max_queries: 5
+#     formatters:
+#         progress:
+#             decorated:           true
+#             verbose:             true
+#             time:                true
+#             language:            fr
+#             output_path:         null
+#             multiline_arguments: true
+# ci:
+#     suites:
+#         default:
+#             contexts:
+#                 - ETNA\FeatureContext\RabbitContext
+#                 - ETNA\FeatureContext\MainContext
+#                 - ETNA\FeatureContext\ApiContext
+#                 - ETNA\FeatureContext\DoctrineContext:
+#                     max_queries: 5
+#                 - ETNA\FeatureContext\CoverageContext:
+#                     coverage_path: /tmp/behat/coverage
+#                     whitelist:
+#                         - app
+#                     blacklist:
+#                         - vendor
+#                         - bin
+#                         - tmp
+#                         - features
+#                         - Tests
+#                 - ETNA\FeatureContext\FixedDateContext:
+#                     date: "2016-04-12 14:42:42"
+#                 - ETNA\FeatureContext\ElasticContext
+#                 - ETNA\FeatureContext\AuthContext
+#                 - Tests\FeatureContext
+#     formatters:
+#         progress:
+#             output_path:         null
+#         junit:
+#             output_path: tmp/behat/behatJunit
+#         html:
+#             output_path: tmp/behat/html
+#     extensions:
+#         emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
+#             name: html
+#             renderer: Twig,Behat2
+#             file_name: index
+#             print_args: true
+#             print_outp: true
+#             loop_break: truewip:
+# wip:
+#     suites:
+#         default:
+#             filters:
+#                 tags: '@wip'
+# behat.yml
+default:
+    autoload:
+        '': %paths.base%/vendor/etna/composer-behat-utils/src/contexts
+    suites:
+        default:
+            paths:
+                - %paths.base%/Tests/Features
+            contexts:
+                - Tests\Bootstrap\FeatureContext
+                - ETNA\FeatureContext\MainContext
+                # - ETNA\FeatureContext\ApiContext
+                # - ETNA\FeatureContext\DoctrineContext:
+                #     max_queries: 10
+                # - ETNA\FeatureContext\ElasticContext
+                - ETNA\FeatureContext\FixedDateContext:
+                    date: "2016-04-12 14:42:42"
+                - ETNA\FeatureContext\AuthContext
+                - ETNA\FeatureContext\TimeProfilerContext:
+                    max_time: 200
+    formatters:
+        progress:
+            decorated:           true
+            verbose:             false
+            time:                true
+            language:            fr
+            output_path:         null
+            multiline_arguments: true
+# ci:
+#     suites:
+#         default:
+#             contexts:
+#                 - ETNA\FeatureContext\MainContext
+#                 - ETNA\FeatureContext\ApiContext
+#                 - ETNA\FeatureContext\DoctrineContext:
+#                     max_queries: 10
+#                 - ETNA\FeatureContext\ElasticContext
+#                 - ETNA\FeatureContext\FixedDateContext:
+#                     date: "2016-04-12 14:42:42"
+#                 - ETNA\FeatureContext\AuthContext
+#                 - ETNA\FeatureContext\CoverageContext:
+#                     coverage_path: /tmp/behat/coverage
+#                     whitelist:
+#                         - app
+#                     blacklist:
+#                         - vendor
+#                         - bin
+#                         - tmp
+#                         - features
+#                         - Tests
+#     formatters:
+#         progress:
+#             output_path:         null
+#         junit:
+#             output_path: tmp/behat/behatJunit
+#         html:
+#             output_path: tmp/behat/behat_report.html
+wip:
+    suites:
+        default:
+            filters:
+                tags: '@wip'
