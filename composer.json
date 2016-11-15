@@ -18,11 +18,15 @@
     "require-dev": {
         "satooshi/php-coveralls": "dev-master",
         "etna/composer-behat-utils": "2.x-dev",
-        "saxulum/saxulum-doctrine-orm-manager-registry-provider": "^3.0",
         "behat/behat": "3.x@stable",
         "phpunit/php-code-coverage": "2.0.*@dev",
-        "etna/doctrine-provider": "2.x",
-        "phpunit/phpcov": "2.0.*@dev"
+        "phpmd/phpmd": "^2.3",
+        "phploc/phploc": "3.x",
+        "sebastian/phpcpd": "^2.0",
+        "squizlabs/php_codesniffer": "^2.5",
+        "phing/phing": "^2.13",
+        "phpunit/phpcov": "2.0.*@dev",
+        "scrutinizer/ocular": "^1.3"
     },
     "autoload": {
         "psr-4": {
@@ -33,7 +37,10 @@
         }
     },
     "scripts": {
-        "test": "behat"
+        "test": "behat",
+        "behat": "behat",
+        "phing": "phing",
+        "coveralls": "coveralls"
     },
     "extra": {
         "branch-alias": {

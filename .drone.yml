@@ -1,19 +1,18 @@
 image: etna/drone-php
 env:
   - APPLICATION_ENV=drone
-  - RABBITMQ_VHOST="/test-behat"
 script:
   - mkdir -p tmp/keys
   - openssl genrsa  -out tmp/keys/private.key 2048
   - openssl rsa -in tmp/keys/private.key -pubout -out tmp/keys/public.key
   - composer install --dev --prefer-source
-  - bin/behat -f progress
+  - composer phing
+  - composer coveralls
 notify:
   slack:
-    team : {{slackTeam}}
-    channel: {{slackChannel}}
+    webhook_url: $$SLACK_WEBHOOK_URL
     username: drone
-    token: {{slackToken}}
+    channel: $$SLACK_CHANNEL
     on_started: true
     on_failure: true
     on_success: true

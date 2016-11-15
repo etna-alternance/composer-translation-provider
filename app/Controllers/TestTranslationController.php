@@ -6,7 +6,6 @@ use Silex\Api\ControllerProviderInterface;
 use Silex\Application;
 use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class TestTranslationController implements ControllerProviderInterface
 {
@@ -18,9 +17,9 @@ class TestTranslationController implements ControllerProviderInterface
         /* @var $controllers ControllerCollection */
         $controllers = $app['controllers_factory'];
 
-        $controllers->get('/translate_fr', [$this, 'TranslateFr']);
+        $controllers->get('/translate_fr', [$this, 'translateFr']);
 
-        $controllers->get('/translate_en', [$this, 'TranslateEn']);
+        $controllers->get('/translate_en', [$this, 'translateEn']);
 
         $controllers->get('/translate_with_tokens_fr', [$this, 'translateWithTokensFr']);
 
@@ -37,7 +36,7 @@ class TestTranslationController implements ControllerProviderInterface
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function TranslateFr(Application $app, Request $req)
+    public function translateFr(Application $app, Request $req)
     {
         $req->setLocale('fr');
 
@@ -52,7 +51,7 @@ class TestTranslationController implements ControllerProviderInterface
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function TranslateEn(Application $app, Request $req)
+    public function translateEn(Application $app, Request $req)
     {
         $req->setLocale('en');
 
@@ -73,7 +72,7 @@ class TestTranslationController implements ControllerProviderInterface
 
         $id = "42";
 
-        return $app->abort(404, "Manager not found : %id%",[
+        return $app->abort(404, "Manager not found : %id%", [
             'Translation' => json_encode(['%id%' => $id])
         ]);
     }
@@ -92,7 +91,7 @@ class TestTranslationController implements ControllerProviderInterface
 
         $id = '42';
 
-        return $app->abort(404, "Manager not found : %id%",[
+        return $app->abort(404, "Manager not found : %id%", [
             'Translation' => json_encode(['%id%' => $id])
         ]);
     }

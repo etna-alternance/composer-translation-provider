@@ -7,4 +7,3 @@ $app = new Silex\Application();
 $app->register(new TestTranslation\Config());
 
 return $app;
-

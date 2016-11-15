@@ -8,15 +8,12 @@ use Silex\Provider\LocaleServiceProvider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Saxulum\DoctrineOrmManagerRegistry\Provider\DoctrineOrmManagerRegistryProvider;
 
 use ETNA\Silex\Provider\Translation\TranslationProvider;
 use ETNA\Silex\Provider\Config as ETNAConf;
 
 class EtnaConfig implements ServiceProviderInterface
 {
-    private $rabbitmq_config;
-
     /**
      *
      * @{inherit doc}
@@ -24,8 +21,6 @@ class EtnaConfig implements ServiceProviderInterface
     public function register(Container $app)
     {
         $app->register(new ServiceControllerServiceProvider());
-
-        $app->register(new DoctrineOrmManagerRegistryProvider());
 
         $app->register(new LocaleServiceProvider());
 
@@ -37,5 +32,4 @@ class EtnaConfig implements ServiceProviderInterface
             return $translator;
         });
     }
-
 }

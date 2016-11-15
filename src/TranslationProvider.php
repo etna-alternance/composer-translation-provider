@@ -2,9 +2,8 @@
 
 namespace ETNA\Silex\Provider\Translation;
 
-use Silex\Application;
-use Pimple\ServiceProviderInterface;
 use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 use Silex\Provider\TranslationServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,10 +30,10 @@ class TranslationProvider implements ServiceProviderInterface
                 $tokens = json_decode($response->headers->get('Translation', "[]"), true);
                 if (isset($tokens["Translation"])) {
                     $tokens = json_decode($tokens["Translation"], true);
-                }
 
-                // on clean le header que l'on a ajouté
-                $response->headers->remove('Translation');
+                    // on clean le header que l'on a ajouté
+                    $response->headers->remove('Translation');
+                }
 
                 // on récupère le contenu de la réponse càd le message d'erreur
                 $content = json_decode($response->getContent(), true);
@@ -47,14 +46,14 @@ class TranslationProvider implements ServiceProviderInterface
                         if ($content !== $translated) {
                             $response->setContent($translated);
                         }
-                    } else if (isset($tokens)) {
-                        foreach ($tokens as $variable => $value) {
-                            $content = str_replace($variable, $value, $content);
-                        }
+                    } elseif (isset($tokens)) {
+                        $content = str_replace(array_keys($tokens), array_values($tokens), $content);
                         $response->setContent(json_encode($content));
                     }
                 }
             }
         );
+
+        $app["dispatcher"]->addSubscriber(new ExceptionListenerWithHeaders($app));
     }
 }

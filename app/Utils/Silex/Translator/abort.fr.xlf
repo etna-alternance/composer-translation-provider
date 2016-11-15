@@ -8,7 +8,7 @@
             </trans-unit>
             <trans-unit id="2">
                 <source>Manager not found : %id%</source>
-                <target>Résponsable non trouvé : %id%</target>
+                <target>Responsable non trouvé : %id%</target>
             </trans-unit>
         </body>
     </file>

@@ -6,7 +6,6 @@ use ETNA\FeatureContext\BaseContext;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
@@ -87,7 +86,7 @@ class FeatureContext extends BaseContext
             $url = substr($url, 1, -1);
         }
 
-        if ($body !== null) {
+        if (null !== $body) {
             if (is_object($body)) {
                 $body = $body->getRaw();
             }
@@ -126,7 +125,7 @@ class FeatureContext extends BaseContext
      */
     public function jeFaisUneRequetteHTTP($method, $url, $body = null)
     {
-        if ($body !== null) {
+        if (null !== $body) {
             $body = file_get_contents($this->requests_path . $body);
             if (!$body) {
                 throw new \Exception("File not found : {$this->requests_path}${body}");

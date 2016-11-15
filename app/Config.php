@@ -28,8 +28,8 @@ class Config implements ServiceProviderInterface
     public function register(Container $app)
     {
         $this->registerEnvironmentParams($app);
-        $app->register(new EtnaConfig());
         $this->registerRoutes($app);
+        $app->register(new EtnaConfig());
 
         $app["dispatcher"]->addSubscriber(new Utils\Silex\EventSubscriber\ExceptionListener($app));
     }
