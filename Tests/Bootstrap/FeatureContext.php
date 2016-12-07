@@ -54,7 +54,7 @@ class FeatureContext extends BaseContext
         if ("application/json" !== $this->response["headers"]["content-type"]) {
             throw new \Exception("Invalid response type");
         }
-        if ("" == $this->response['body']) {
+        if ("" === trim($this->response['body'])) {
             throw new \Exception("No response");
         }
         $json = json_decode($this->response['body']);

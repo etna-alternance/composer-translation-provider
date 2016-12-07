@@ -16,12 +16,7 @@ class TranslationProvider implements ServiceProviderInterface
     public function register(Container $app)
     {
         if (!isset($app["translator"])) {
-            $app->register(
-                new TranslationServiceProvider(),
-                [
-                    'locale_fallbacks' => ['fr']
-                ]
-            );
+            $app->register(new TranslationServiceProvider());
         }
 
         $app->after(
@@ -40,16 +35,8 @@ class TranslationProvider implements ServiceProviderInterface
 
                 // on vérifie que c'est bien une string on la traduit et on change le contenu de la réponse
                 if (is_string($content)) {
-                    if ('fr' === $request->getLocale()) {
-                        $translated = json_encode($app["translator"]->trans($content, $tokens, 'abort'));
-
-                        if ($content !== $translated) {
-                            $response->setContent($translated);
-                        }
-                    } elseif (isset($tokens)) {
-                        $content = str_replace(array_keys($tokens), array_values($tokens), $content);
-                        $response->setContent(json_encode($content));
-                    }
+                    $translated = $app["translator"]->trans($content, $tokens, 'abort', $request->getLocale());
+                    $response->setContent(json_encode($translated));
                 }
             }
         );

@@ -34,13 +34,8 @@ class ExceptionListenerWithHeaders implements EventSubscriberInterface
                 break;
         }
 
-        if (is_a($exception, "InvalidArgumentException")) {
-            $code = 400;
-        }
-        if (is_a($exception, "Symfony\Component\HttpKernel\Exception\HttpException")) {
-            $headers                = $exception->getHeaders();
-            $headers["Translation"] = json_encode($headers);
-        }
+        $headers                = $exception->getHeaders();
+        $headers["Translation"] = json_encode($headers);
         $event->setResponse(
             new JsonResponse(
                 (true === $this->app["debug"] || 500 !== $code) ? $exception->getMessage() : null,
