@@ -42,3 +42,44 @@ Ceux ci seront remplis de la façon suivante :
         'Translation' => json_encode(['%entityName%' => $entity_name])
     ]);
 ```
+
+Lorsque le message ne contient pas de token on n'as pas besoin d'envoyer de 3ème paramètre au `$app->abort()`
+
+Pour que les `headers` que l'on surcharge au `app->abort()` soient bien envoyés dans la response que recevra notre provider il faut que la fonction `onKernelExpection` de votre `ExceptionListener` les récupère et les set correctement comme ici :
+
+```
+    public function onKernelException(GetResponseForExceptionEvent $event)
+    {
+        $exception = $event->getException();
+        $headers   = [];
+
+        switch (true) {
+            case method_exists($exception, 'getStatusCode'):
+                $code = $exception->getStatusCode();
+                break;
+
+            case method_exists($exception, 'getCode'):
+                $code = $exception->getCode();
+                break;
+
+            default:
+                $code = 500;
+                break;
+        }
+
+        if (is_a($exception, "InvalidArgumentException")) {
+            $code = 400;
+        }
+        if (is_a($exception, "Symfony\Component\HttpKernel\Exception\HttpException")) {
+            $headers                = $exception->getHeaders();
+            $headers["Translation"] = json_encode($headers);
+        }
+        $event->setResponse(
+            new JsonResponse(
+                (true === $this->app["debug"] || 500 !== $code) ? $exception->getMessage() : null,
+                $code,
+                $headers
+            )
+        );
+    }
+```

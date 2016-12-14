@@ -40,7 +40,5 @@ class TranslationProvider implements ServiceProviderInterface
                 }
             }
         );
-
-        $app["dispatcher"]->addSubscriber(new ExceptionListenerWithHeaders($app));
     }
 }

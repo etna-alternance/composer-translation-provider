@@ -20,14 +20,17 @@ class ExceptionListener implements EventSubscriberInterface
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         $exception = $event->getException();
+        $headers   = [];
 
         switch (true) {
             case method_exists($exception, 'getStatusCode'):
                 $code = $exception->getStatusCode();
                 break;
+
             case method_exists($exception, 'getCode'):
                 $code = $exception->getCode();
                 break;
+
             default:
                 $code = 500;
                 break;
@@ -36,10 +39,15 @@ class ExceptionListener implements EventSubscriberInterface
         if (is_a($exception, "InvalidArgumentException")) {
             $code = 400;
         }
+        if (is_a($exception, "Symfony\Component\HttpKernel\Exception\HttpException")) {
+            $headers                = $exception->getHeaders();
+            $headers["Translation"] = json_encode($headers);
+        }
         $event->setResponse(
             new JsonResponse(
                 (true === $this->app["debug"] || 500 !== $code) ? $exception->getMessage() : null,
-                $code
+                $code,
+                $headers
             )
         );
     }
