@@ -1,0 +1,56 @@
+{
+    "name": "etna/translation-provider",
+    "description": "ETNA Translation Provider",
+    "keywords": ["utils", "config", "provider", "silex"],
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "ETNA",
+            "email": "dev@etna-alternance.net",
+            "homepage": "http://etna-alternance.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+        "silex/silex": "~2.0@dev",
+        "symfony/translation": "~3.0"
+    },
+    "require-dev": {
+        "satooshi/php-coveralls": "dev-master",
+        "etna/composer-behat-utils": "2.x-dev",
+        "behat/behat": "3.x@stable",
+        "phpunit/php-code-coverage": "2.0.*@dev",
+        "phpmd/phpmd": "^2.3",
+        "phploc/phploc": "3.x",
+        "sebastian/phpcpd": "^2.0",
+        "squizlabs/php_codesniffer": "^2.5",
+        "phing/phing": "^2.13",
+        "phpunit/phpcov": "2.0.*@dev",
+        "scrutinizer/ocular": "^1.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tests\\": "Tests",
+            "TestTranslation\\": "app",
+            "ETNA\\Silex\\Provider\\Translation\\": "src",
+            "ETNA\\FeatureContext\\": "etna/composer-behat-utils/src/"
+        }
+    },
+    "scripts": {
+        "test": "behat",
+        "behat": "behat",
+        "phing": "phing",
+        "coveralls": "coveralls"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0-dev"
+        }
+    },
+    "repositories": [
+       {
+           "type": "composer",
+           "url":  "https://blu-composer.herokuapp.com"
+       }
+   ]
+}

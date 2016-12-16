@@ -1,0 +1,38 @@
+# behat.yml
+default:
+    suites:
+        default:
+            paths:
+                - %paths.base%/Tests/Features
+            contexts:
+                - Tests\Bootstrap\FeatureContext
+                - ETNA\FeatureContext\MainContext
+    formatters:
+        progress:
+            decorated:           true
+            verbose:             false
+            time:                true
+            language:            fr
+            output_path:         null
+            multiline_arguments: true
+ci:
+    suites:
+        default:
+            contexts:
+                - ETNA\FeatureContext\CoverageContext:
+                    coverage_path: /tmp/behat/coverage
+                    whitelist:
+                        - app
+                        - src
+                    blacklist:
+                        - vendor
+                        - bin
+                        - tmp
+                        - Tests
+                - Tests\Bootstrap\FeatureContext
+                - ETNA\FeatureContext\MainContext
+wip:
+    suites:
+        default:
+            filters:
+                tags: '@wip'
